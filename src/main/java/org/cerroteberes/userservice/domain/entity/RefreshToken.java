@@ -1,4 +1,4 @@
-package org.cerroteberes.authservice.domain.entity;
+package org.cerroteberes.userservice.domain.entity;
 
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;

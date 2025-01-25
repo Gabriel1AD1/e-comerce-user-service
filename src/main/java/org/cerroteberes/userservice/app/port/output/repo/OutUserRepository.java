@@ -1,6 +1,6 @@
-package org.cerroteberes.authservice.app.port.output.repo;
+package org.cerroteberes.userservice.app.port.output.repo;
 
-import org.cerroteberes.authservice.domain.repo.UserRepository;
+import org.cerroteberes.userservice.domain.repo.UserRepository;
 
 public interface OutUserRepository  extends UserRepository {
 }

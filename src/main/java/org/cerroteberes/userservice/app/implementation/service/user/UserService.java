@@ -1,16 +1,16 @@
-package org.cerroteberes.authservice.app.implementation.service.user;
+package org.cerroteberes.userservice.app.implementation.service.user;
 
-import org.cerroteberes.authservice.domain.dto.request.RequestCreateUserDTO;
-import org.cerroteberes.authservice.domain.dto.request.RequestUpdateUserDTO;
-import org.cerroteberes.authservice.domain.dto.response.ReadUserDTO;
-import org.cerroteberes.authservice.domain.entity.User;
+import org.cerroteberes.userservice.domain.dto.response.ReadUserDTO;
+import org.cerroteberes.userservice.domain.entity.User;
 
 import java.util.List;
 
 public interface UserService {
-    ReadUserDTO findById(Long id);
+    ReadUserDTO readFindById(Long id);
     List<ReadUserDTO> getAll();
     User create(User dto);
     void update(User dto,Long userId);
     void delete(Long idUser);
+
+    User findById(Long id);
 }

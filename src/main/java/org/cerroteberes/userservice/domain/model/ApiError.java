@@ -1,4 +1,4 @@
-package com.labotec.traccar.infra.common;
+package org.cerroteberes.userservice.domain.model;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;

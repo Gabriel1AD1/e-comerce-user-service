@@ -1,4 +1,4 @@
-package org.cerroteberes.authservice.app.exception;
+package org.cerroteberes.userservice.app.exception;
 
 public class EntityNotFoundException extends RuntimeException {
     public EntityNotFoundException(String message) {

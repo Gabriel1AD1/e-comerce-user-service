@@ -1,9 +1,9 @@
-package org.cerroteberes.authservice.domain.dto.request;
+package org.cerroteberes.userservice.domain.dto.request;
 
-import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Size;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Pattern;
+import jakarta.validation.constraints.Size;
 import lombok.Value;
 
 import java.io.Serializable;

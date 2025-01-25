@@ -1,11 +1,11 @@
-package org.cerroteberes.authservice.app.implementation.service.user;
+package org.cerroteberes.userservice.app.implementation.service.user;
 
 import lombok.AllArgsConstructor;
-import org.cerroteberes.authservice.app.exception.EntityNotFoundException;
-import org.cerroteberes.authservice.app.port.output.annotation.AppService;
-import org.cerroteberes.authservice.domain.dto.response.ReadUserDTO;
-import org.cerroteberes.authservice.domain.entity.User;
-import org.cerroteberes.authservice.domain.repo.UserRepository;
+import org.cerroteberes.userservice.app.exception.EntityNotFoundException;
+import org.cerroteberes.userservice.app.port.output.annotation.AppService;
+import org.cerroteberes.userservice.domain.dto.response.ReadUserDTO;
+import org.cerroteberes.userservice.domain.entity.User;
+import org.cerroteberes.userservice.domain.repo.UserRepository;
 
 import java.time.Instant;
 import java.util.List;
@@ -15,7 +15,7 @@ import java.util.List;
 public class UserServiceI implements UserService {
     private final UserRepository userRepository;
     @Override
-    public ReadUserDTO findById(Long id) {
+    public ReadUserDTO readFindById(Long id) {
         return userRepository.findByIdRead(id).orElseThrow(
                 () -> new EntityNotFoundException("El usuario buscado no ha sido encontrado")
         );
@@ -38,7 +38,6 @@ public class UserServiceI implements UserService {
         );
         user.setPassword(dto.getPassword());
         user.setName(dto.getName());
-        user.setRoles(dto.getRoles());
         user.setUpdateAt(Instant.now());
         userRepository.save(dto);
     }
@@ -46,5 +45,12 @@ public class UserServiceI implements UserService {
     @Override
     public void delete(Long idUser) {
         userRepository.delete(idUser);
+    }
+
+    @Override
+    public User findById(Long id) {
+        return userRepository.findById(id).orElseThrow(
+                () -> new EntityNotFoundException("Usuario no encontrado")
+        );
     }
 }

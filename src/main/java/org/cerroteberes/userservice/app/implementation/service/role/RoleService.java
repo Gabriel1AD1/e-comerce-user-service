@@ -1,7 +1,7 @@
-package org.cerroteberes.authservice.app.implementation.service.role;
+package org.cerroteberes.userservice.app.implementation.service.role;
 
-import org.cerroteberes.authservice.domain.dto.response.ReadRoleDTO;
-import org.cerroteberes.authservice.domain.entity.Role;
+import org.cerroteberes.userservice.domain.dto.response.ReadRoleDTO;
+import org.cerroteberes.userservice.domain.entity.Role;
 
 import java.util.List;
 

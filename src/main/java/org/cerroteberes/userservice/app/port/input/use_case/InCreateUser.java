@@ -1,8 +1,8 @@
-package org.cerroteberes.authservice.app.port.input.use_case;
+package org.cerroteberes.userservice.app.port.input.use_case;
 
-import jakarta.validation.Valid;
-import org.cerroteberes.authservice.domain.dto.request.RequestCreateUserDTO;
+import org.cerroteberes.userservice.domain.dto.request.RequestCreateUserDTO;
+import org.cerroteberes.userservice.domain.entity.User;
 
 public interface InCreateUser {
-    Long execute(RequestCreateUserDTO dto);
+    User execute(RequestCreateUserDTO dto);
 }

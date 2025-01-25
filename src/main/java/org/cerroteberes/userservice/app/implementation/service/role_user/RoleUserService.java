@@ -1,11 +1,11 @@
-package org.cerroteberes.authservice.app.implementation.service.role_user;
+package org.cerroteberes.userservice.app.implementation.service.role_user;
 
-import org.cerroteberes.authservice.domain.entity.RoleUser;
+import org.cerroteberes.userservice.domain.entity.UserRole;
 
 public interface RoleUserService {
-    RoleUser create(Long idUser, Long roleId);
+    UserRole create(Long idUser, Long roleId);
 
-    RoleUser update(Long idUser, Long roleId);
+    UserRole update(Long idUser, Long roleId);
 
     void delete(Long idUser,Long roleId);
 }

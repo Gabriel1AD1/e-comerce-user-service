@@ -1,12 +1,22 @@
-package org.cerroteberes.authservice.domain.repo;
+package org.cerroteberes.userservice.domain.repo;
 
-import org.cerroteberes.authservice.domain.comons.ReadRepository;
-import org.cerroteberes.authservice.domain.comons.WriteRepository;
-import org.cerroteberes.authservice.domain.dto.response.ReadUserDTO;
-import org.cerroteberes.authservice.domain.entity.User;
+import org.cerroteberes.userservice.domain.comons.ReadRepository;
+import org.cerroteberes.userservice.domain.comons.WriteRepository;
+import org.cerroteberes.userservice.domain.dto.response.ReadUserDTO;
+import org.cerroteberes.userservice.domain.entity.User;
 
-import java.util.Optional;
 
-public interface UserRepository extends WriteRepository<User,Long>, ReadRepository<ReadUserDTO,Long> {
-    Optional<User> findById(Long userId);
+/**
+ * Repositorio especializado para la gestión de usuarios.
+ * <p>
+ * Esta interfaz combina las capacidades de lectura y escritura, extendiendo las interfaces genéricas
+ * {@link WriteRepository} y {@link ReadRepository}. Proporciona métodos para manejar entidades
+ * de usuario ({@link User}) y sus representaciones de solo lectura ({@link ReadUserDTO}).
+ * </p>
+ *
+ * @see WriteRepository
+ * @see ReadRepository
+ */
+public interface UserRepository extends WriteRepository<User, Long>, ReadRepository<ReadUserDTO, User, Long> {
+
 }

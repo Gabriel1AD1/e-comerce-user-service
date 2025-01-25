@@ -1,4 +1,5 @@
-package org.cerroteberes.authservice.app.port.input.use_case;
+package org.cerroteberes.userservice.app.port.input.use_case;
 
 public interface InDeleteUser {
+    void execute(Long id);
 }

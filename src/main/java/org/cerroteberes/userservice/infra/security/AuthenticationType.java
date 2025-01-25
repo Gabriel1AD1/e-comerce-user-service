@@ -1,4 +1,4 @@
-package com.labotec.traccar.infra.security;
+package org.cerroteberes.userservice.infra.security;
 
 public enum AuthenticationType {
     NONE,           // Sin autenticación.

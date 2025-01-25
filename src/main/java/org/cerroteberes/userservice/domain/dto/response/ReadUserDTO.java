@@ -1,4 +1,4 @@
-package org.cerroteberes.authservice.domain.dto.response;
+package org.cerroteberes.userservice.domain.dto.response;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
@@ -17,6 +17,4 @@ public class ReadUserDTO {
     @JsonProperty("user_name")
     private String name;
 
-    @JsonProperty("user_password")
-    private String password;
 }

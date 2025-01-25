@@ -1,18 +1,7 @@
-/**
- * SecurityConfig.java
- * Esta clase configura la seguridad de Spring Security para la aplicación,
- * definiendo la cadena de filtros de seguridad y las reglas de acceso
- * para diferentes endpoints. Personaliza el comportamiento para endpoints
- * públicos, privados y Swagger basándose en roles y autoridades.
- * Características:
- * - Deshabilita CORS y la protección contra CSRF para simplificar la configuración.
- * - Agrega un filtro de seguridad personalizado para la autenticación basada en tokens.
- * - Define el control de acceso a los endpoints con roles y autoridades.
- */
-
-package com.labotec.traccar.infra.security;
+package org.cerroteberes.userservice.infra.security;
 
 import lombok.AllArgsConstructor;
+import org.cerroteberes.userservice.domain.entity.enums.NameRole;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -21,7 +10,8 @@ import org.springframework.security.config.annotation.web.configurers.AbstractHt
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
-import static com.labotec.traccar.infra.security.EndpointSecurityConstant.*;
+import static org.cerroteberes.userservice.infra.security.EndpointSecurityConstant.*;
+
 
 @Configuration
 @EnableWebSecurity
@@ -53,9 +43,8 @@ public class SecurityConfig {
                         // Endpoints públicos: accesibles para todos sin autenticación
                         .requestMatchers(ENDPOINT_PUBLIC).permitAll()
                         // Endpoints privados: requieren la autoridad ROLE_USER
-                        .requestMatchers(ENDPOINT_PRIVATE).hasAnyAuthority(RolUser.ROLE_USER.name(),RolUser.ROLE_ADMIN.name())
+                        .requestMatchers(ENDPOINT_SWAGGER).authenticated()
                         // Endpoints Swagger: requieren la autoridad ROLE_ADMIN
-                        .requestMatchers(ENDPOINT_SWAGGER).hasAnyAuthority(RolUser.ROLE_ADMIN.name())
                         // Todas las demás solicitudes: requieren autenticación
                         .anyRequest().authenticated()
                 )

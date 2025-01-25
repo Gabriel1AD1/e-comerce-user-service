@@ -1,11 +1,11 @@
-package org.cerroteberes.authservice.domain.dto.response;
+package org.cerroteberes.userservice.domain.dto.response;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.cerroteberes.authservice.domain.entity.enums.NameRole;
+import org.cerroteberes.userservice.domain.entity.enums.NameRole;
 
 @Data
 @Builder
