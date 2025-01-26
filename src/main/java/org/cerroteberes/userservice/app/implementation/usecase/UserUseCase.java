@@ -1,7 +1,7 @@
 package org.cerroteberes.userservice.app.implementation.usecase;
 
-import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
+import org.cerroteberes.userservice.app.implementation.service.role.RoleService;
 import org.cerroteberes.userservice.app.implementation.service.role_user.RoleUserService;
 import org.cerroteberes.userservice.app.implementation.service.user.UserService;
 import org.cerroteberes.userservice.app.mapper.dto.RequestUserMapper;
@@ -11,8 +11,11 @@ import org.cerroteberes.userservice.domain.dto.request.RequestCreateUserDTO;
 import org.cerroteberes.userservice.domain.dto.request.RequestUpdateUserDTO;
 import org.cerroteberes.userservice.domain.dto.response.ReadUserDTO;
 import org.cerroteberes.userservice.domain.dto.response.ResponseUserPrincipalDTO;
+import org.cerroteberes.userservice.domain.entity.Role;
 import org.cerroteberes.userservice.domain.entity.User;
+import org.cerroteberes.userservice.domain.entity.UserRole;
 import org.cerroteberes.userservice.domain.entity.enums.NameRole;
+import org.cerroteberes.userservice.domain.entity.enums.TypeUserSignup;
 
 import java.util.List;
 
@@ -21,11 +24,23 @@ import java.util.List;
 public class UserUseCase implements InCreateUser, InDeleteUser, InListUser, InUpdateUser, InGetUserPrincipalForEmail ,InGetUserPrincipalForUserId{
     private final RequestUserMapper requestUserMapper;
     private final UserService userService;
+    private final RoleService roleService;
     private final RoleUserService roleUserService;
     @Override
-    public User executeCreateUser(RequestCreateUserDTO dto) {
+    public User executeCreateUser(RequestCreateUserDTO dto, TypeUserSignup typeUserSignup) {
         User user = requestUserMapper.toEntity(dto);
-        return userService.create(user);
+        User userSave= userService.create(user);
+        switch (typeUserSignup){
+            case VENDOR -> {
+                Role role = roleService.findByRoleName(NameRole.VENDOR);;
+                roleUserService.create(userSave.getId(), role.getId());
+            }
+            case CLIENT -> {
+                Role role = roleService.findByRoleName(NameRole.CLIENT);;
+                roleUserService.create(userSave.getId(), role.getId());
+            }
+        }
+        return userSave;
     }
 
     @Override

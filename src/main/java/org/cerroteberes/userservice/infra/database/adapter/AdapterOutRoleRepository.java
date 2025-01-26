@@ -4,6 +4,8 @@ import lombok.AllArgsConstructor;
 import org.cerroteberes.userservice.app.port.output.repo.OutRoleRepository;
 import org.cerroteberes.userservice.domain.dto.response.ReadRoleDTO;
 import org.cerroteberes.userservice.domain.entity.Role;
+import org.cerroteberes.userservice.domain.entity.enums.NameRole;
+import org.cerroteberes.userservice.infra.database.entity.RoleEntity;
 import org.cerroteberes.userservice.infra.database.mapper.RoleEntityMapper;
 import org.cerroteberes.userservice.infra.database.repo.RoleEntityRepository;
 import org.springframework.stereotype.Repository;
@@ -25,6 +27,13 @@ public class AdapterOutRoleRepository implements OutRoleRepository {
         return roleEntityMapper.toDomainList(
                 roleEntityRepository.findAll()
         );
+    }
+
+    @Override
+    public Optional<Role> findByRoleName(NameRole nameRole) {
+        RoleEntity roleEntity = roleEntityRepository.findByNameRole(nameRole);
+        Role role = roleEntityMapper.toDomain(roleEntity);
+        return wrapInOptional(role);
     }
 
     @Override

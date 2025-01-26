@@ -2,6 +2,7 @@ package org.cerroteberes.userservice.app.implementation.service.role;
 
 import org.cerroteberes.userservice.domain.dto.response.ReadRoleDTO;
 import org.cerroteberes.userservice.domain.entity.Role;
+import org.cerroteberes.userservice.domain.entity.enums.NameRole;
 
 import java.util.List;
 
@@ -11,4 +12,6 @@ public interface RoleService {
     void delete(Long id);
     List<ReadRoleDTO> FindALlRead();
     List<Role> findAll();
+
+    Role findByRoleName(NameRole nameRole);
 }

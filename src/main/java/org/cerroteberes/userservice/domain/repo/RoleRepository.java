@@ -4,8 +4,10 @@ import org.cerroteberes.userservice.domain.comons.ReadRepository;
 import org.cerroteberes.userservice.domain.comons.WriteRepository;
 import org.cerroteberes.userservice.domain.dto.response.ReadRoleDTO;
 import org.cerroteberes.userservice.domain.entity.Role;
+import org.cerroteberes.userservice.domain.entity.enums.NameRole;
 
 import java.util.List;
+import java.util.Optional;
 
 /**
  * Repositorio especializado para la gestión de roles.
@@ -29,4 +31,6 @@ public interface RoleRepository extends WriteRepository<Role, Long>, ReadReposit
      * @return Una lista de todos los roles registrados en la base de datos.
      */
     List<Role> findAll();
+
+    Optional<Role> findByRoleName(NameRole nameRole);
 }

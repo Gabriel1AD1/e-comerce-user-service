@@ -7,8 +7,7 @@ import org.cerroteberes.userservice.app.port.input.use_case.*;
 import org.cerroteberes.userservice.domain.dto.request.RequestCreateUserDTO;
 import org.cerroteberes.userservice.domain.dto.request.RequestUpdateUserDTO;
 import org.cerroteberes.userservice.domain.dto.response.ReadUserDTO;
-import org.cerroteberes.userservice.domain.dto.response.ResponseUserPrincipalDTO;
-import org.cerroteberes.userservice.domain.model.MCSVPrincipal;
+import org.cerroteberes.userservice.domain.entity.enums.TypeUserSignup;
 import org.cerroteberes.userservice.infra.security.models.MCSVPrincipalSecurity;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -29,9 +28,9 @@ public class UserRest {
     private final InDeleteUser inDeleteUser;
     private final InListUser inListUser;
     private final InUpdateUser inUpdateUser;
-    @PostMapping
-    public ResponseEntity<Void> createResource(@Valid@RequestBody RequestCreateUserDTO dto){
-        Long idGenerate = inCreateUser.executeCreateUser(dto).getId();
+    @PostMapping("/{type-user}")
+    public ResponseEntity<Void> createResource(@Valid@RequestBody RequestCreateUserDTO dto,@PathVariable("type-user") TypeUserSignup typeUserSignup){
+        Long idGenerate = inCreateUser.executeCreateUser(dto, typeUserSignup).getId();
         return ResponseEntity.created(URI.create("/api/v1/user/".concat(idGenerate.toString()))).build();
     }
     @GetMapping
