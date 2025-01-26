@@ -1,9 +1,7 @@
 package org.cerroteberes.userservice.domain.dto.request;
 
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Pattern;
-import jakarta.validation.constraints.Size;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import jakarta.validation.constraints.*;
 import lombok.Value;
 
 import java.io.Serializable;
@@ -13,12 +11,17 @@ import java.io.Serializable;
  */
 @Value
 public class RequestCreateUserDTO implements Serializable {
-
+    @JsonProperty("name")
     @NotNull(message = "El nombre no puede ser nulo")
     @NotBlank(message = "El nombre no puede estar vacío")
     @Size(min = 3, max = 100, message = "El nombre debe tener entre 3 y 100 caracteres")
     String name;
+    @JsonProperty("email")
+    @Email
+    @NotNull
+    String email;
 
+    @JsonProperty("password")
     @NotNull(message = "La contraseña no puede ser nula")
     @NotBlank(message = "La contraseña no puede estar vacía")
     @Size(min = 8, message = "La contraseña debe tener al menos 8 caracteres")

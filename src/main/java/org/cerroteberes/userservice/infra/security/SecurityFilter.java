@@ -8,8 +8,11 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.AllArgsConstructor;
 import org.cerroteberes.userservice.domain.model.ApiError;
+import org.cerroteberes.userservice.domain.model.MCSVPrincipal;
 import org.cerroteberes.userservice.domain.model.UserPrincipal;
 import org.cerroteberes.userservice.infra.exeception.UnauthorizedException;
+import org.cerroteberes.userservice.infra.security.models.MCSVPrincipalSecurity;
+import org.cerroteberes.userservice.infra.security.models.UserPrincipalSecurity;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -59,23 +62,42 @@ public class SecurityFilter extends OncePerRequestFilter {
             String bearerToken = authorizationHeader.get().substring(7);  // Extrae el token
 
             try {
-                // Obtener UserPrincipal desde el token
-                UserPrincipal userPrincipal = jwtTokenUtil.getUserPrincipalFromToken(bearerToken);
-                logger.debug("UserPrincipal extraído: " + userPrincipal);
+                // Obtener Principal desde el token
+                Object userPrincipalObj = jwtTokenUtil.getUserPrincipalFromToken(bearerToken);
 
-                // Crear una autenticación basada en el UserPrincipal
-                UsernamePasswordAuthenticationToken authentication =
-                        new UsernamePasswordAuthenticationToken(userPrincipal, null, userPrincipal.getRoles().stream()
-                                .map(role -> new SimpleGrantedAuthority(role.name()))
-                                .collect(Collectors.toList()));
-                authentication.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
+                // Verificar si es un MCSVPrincipal
+                if (userPrincipalObj instanceof MCSVPrincipal mcsvPrincipal) {
+                    // Crear una autenticación basada en el UserPrincipal
 
-                // Establecer el contexto de seguridad
-                SecurityContextHolder.getContext().setAuthentication(authentication);
+                    UsernamePasswordAuthenticationToken authentication =
+                            new UsernamePasswordAuthenticationToken(mcsvPrincipal, null, mcsvPrincipal.getRoleMicroservices().stream()
+                                    .map(role -> new SimpleGrantedAuthority("ROLE_" + role.name()))
+                                    .collect(Collectors.toList()));
+                    authentication.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
+                    // Establecer el contexto de seguridad
+                    SecurityContextHolder.getContext().setAuthentication(authentication);
+                    logger.debug("AUTENTICACION EXITOSA PARA MICROSERVICIO");
+                }
+
+                // Verificar si es un UserPrincipal
+                if (userPrincipalObj instanceof UserPrincipal userPrincipal) {
+                    // Crear una autenticación basada en el UserPrincipal
+                    UsernamePasswordAuthenticationToken authentication =
+                            new UsernamePasswordAuthenticationToken(userPrincipal, null, userPrincipal.getRoles().stream()
+                                    .map(role -> new SimpleGrantedAuthority("ROLE_" + role.name()))
+                                    .collect(Collectors.toList()));
+                    authentication.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
+                    // Establecer el contexto de seguridad
+                    SecurityContextHolder.getContext().setAuthentication(authentication);
+                    logger.debug("AUTENTICACION EXITOSA PARA USUARIO");
+                }
+
+
 
             } catch (Exception e) {
                 logger.error("Error al procesar el token JWT: " + e.getMessage());
                 response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+                logger.warn("Error en el procesamiento del jwt {}"+e.getMessage());
                 response.getWriter().write("Token inválido");
                 return;
             }

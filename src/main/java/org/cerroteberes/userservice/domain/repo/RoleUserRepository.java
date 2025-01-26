@@ -3,7 +3,9 @@ package org.cerroteberes.userservice.domain.repo;
 import org.cerroteberes.userservice.domain.comons.ReadRepository;
 import org.cerroteberes.userservice.domain.comons.WriteRepository;
 import org.cerroteberes.userservice.domain.entity.UserRole;
+import org.cerroteberes.userservice.domain.entity.enums.NameRole;
 
+import java.util.List;
 import java.util.Optional;
 
 /**
@@ -43,4 +45,6 @@ public interface RoleUserRepository extends WriteRepository<UserRole, Long> {
      * @return Un entero que indica el número de filas afectadas por la operación (1 si se eliminó una relación, 0 en caso contrario).
      */
     int deleteByIdUserAndIdRole(Long idUser, Long roleId);
+
+    List<NameRole> findAllByUserId(Long userId);
 }

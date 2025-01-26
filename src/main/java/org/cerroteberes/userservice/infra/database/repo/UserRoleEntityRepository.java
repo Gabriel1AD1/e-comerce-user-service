@@ -1,5 +1,6 @@
 package org.cerroteberes.userservice.infra.database.repo;
 
+import org.cerroteberes.userservice.domain.entity.enums.NameRole;
 import org.cerroteberes.userservice.infra.database.entity.RoleEntity;
 import org.cerroteberes.userservice.infra.database.entity.UserEntity;
 import org.cerroteberes.userservice.infra.database.entity.UserRoleEntity;
@@ -19,4 +20,7 @@ public interface UserRoleEntityRepository extends JpaRepository<UserRoleEntity, 
     @Modifying
     @Query("delete from UserRoleEntity u where u.user.id = ?1 and u.role.id = ?2")
     int deleteByUserIdAndRoleId(Long user_id, Long role_id);
+
+    @Query("SELECT ur.role.nameRole FROM UserRoleEntity ur WHERE ur.user.id = :userId")
+    List<NameRole> findRoleNamesByUserId(Long userId);
 }

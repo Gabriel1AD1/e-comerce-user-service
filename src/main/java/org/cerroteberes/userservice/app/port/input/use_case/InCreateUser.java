@@ -4,5 +4,5 @@ import org.cerroteberes.userservice.domain.dto.request.RequestCreateUserDTO;
 import org.cerroteberes.userservice.domain.entity.User;
 
 public interface InCreateUser {
-    User execute(RequestCreateUserDTO dto);
+    User executeCreateUser(RequestCreateUserDTO dto);
 }

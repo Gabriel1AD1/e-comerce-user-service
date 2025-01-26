@@ -5,6 +5,8 @@ import org.cerroteberes.userservice.domain.comons.WriteRepository;
 import org.cerroteberes.userservice.domain.dto.response.ReadUserDTO;
 import org.cerroteberes.userservice.domain.entity.User;
 
+import java.util.Optional;
+
 
 /**
  * Repositorio especializado para la gestión de usuarios.
@@ -19,4 +21,5 @@ import org.cerroteberes.userservice.domain.entity.User;
  */
 public interface UserRepository extends WriteRepository<User, Long>, ReadRepository<ReadUserDTO, User, Long> {
 
+    Optional<User> findByEmail(String email);
 }

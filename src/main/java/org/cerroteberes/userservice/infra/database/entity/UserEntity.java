@@ -13,7 +13,7 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name = "users") // Nombre de la tabla en la base de datos
+@Table(name = "tbl_users") // Nombre de la tabla en la base de datos
 public class UserEntity {
 
     @Id
@@ -22,6 +22,9 @@ public class UserEntity {
 
     @Column(nullable = false) // Campo obligatorio
     private String name;
+
+    @Column(nullable = false)
+    private String email;
 
     @Column(nullable = false)
     private String password;

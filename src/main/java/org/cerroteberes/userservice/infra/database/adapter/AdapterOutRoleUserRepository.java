@@ -3,6 +3,7 @@ package org.cerroteberes.userservice.infra.database.adapter;
 import lombok.AllArgsConstructor;
 import org.cerroteberes.userservice.app.port.output.repo.OutRoleUserRepository;
 import org.cerroteberes.userservice.domain.entity.UserRole;
+import org.cerroteberes.userservice.domain.entity.enums.NameRole;
 import org.cerroteberes.userservice.infra.database.entity.RoleEntity;
 import org.cerroteberes.userservice.infra.database.entity.UserEntity;
 import org.cerroteberes.userservice.infra.database.entity.UserRoleEntity;
@@ -10,6 +11,7 @@ import org.cerroteberes.userservice.infra.database.mapper.UserRoleEntityMapper;
 import org.cerroteberes.userservice.infra.database.repo.UserRoleEntityRepository;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
 import java.util.Optional;
 
 import static org.cerroteberes.userservice.app.utils.OptionalMapper.wrapInOptional;
@@ -36,6 +38,11 @@ public class AdapterOutRoleUserRepository implements OutRoleUserRepository {
         return userRoleEntityRepository.deleteByUserIdAndRoleId(idUser,roleId);
     }
 
+    @Override
+    public List<NameRole> findAllByUserId(Long userId) {
+        return userRoleEntityRepository.findRoleNamesByUserId(userId);
+    }
+
 
     @Override
     public UserRole save(UserRole entity) {
@@ -48,4 +55,5 @@ public class AdapterOutRoleUserRepository implements OutRoleUserRepository {
     public void delete(Long id) {
         userRoleEntityRepository.deleteById(id);
     }
+
 }

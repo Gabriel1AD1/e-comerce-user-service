@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import org.cerroteberes.userservice.domain.entity.enums.NameRole;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
@@ -15,6 +16,7 @@ import static org.cerroteberes.userservice.infra.security.EndpointSecurityConsta
 
 @Configuration
 @EnableWebSecurity
+@EnableMethodSecurity
 @AllArgsConstructor
 public class SecurityConfig {
 
@@ -22,7 +24,6 @@ public class SecurityConfig {
      * Filtro de seguridad personalizado para la autenticación basada en tokens.
      */
     private final SecurityFilter securityFilter;
-
     /**
      * Configura la cadena de filtros de seguridad para la aplicación.
      *
@@ -42,6 +43,7 @@ public class SecurityConfig {
                 .authorizeHttpRequests(authorize -> authorize
                         // Endpoints públicos: accesibles para todos sin autenticación
                         .requestMatchers(ENDPOINT_PUBLIC).permitAll()
+                        .requestMatchers(ENDPOINT_PRIVATE).authenticated()
                         // Endpoints privados: requieren la autoridad ROLE_USER
                         .requestMatchers(ENDPOINT_SWAGGER).authenticated()
                         // Endpoints Swagger: requieren la autoridad ROLE_ADMIN

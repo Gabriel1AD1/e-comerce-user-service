@@ -58,4 +58,11 @@ public class AdapterOutUserRepository implements OutUserRepository {
     public void delete(Long id) {
         userEntityRepository.deleteById(id);
     }
+
+    @Override
+    public Optional<User> findByEmail(String email) {
+        UserEntity userEntity = userEntityRepository.findByEmail(email);
+        User user = userEntityMapper.toDomain(userEntity);
+        return wrapInOptional(user);
+    }
 }

@@ -6,6 +6,7 @@ public class EndpointSecurityConstant {
     };
 
     public static final String[] ENDPOINT_PRIVATE = {
+            "/api/v1/**"
 
     };
     public static final String[] ENDPOINT_SWAGGER= {

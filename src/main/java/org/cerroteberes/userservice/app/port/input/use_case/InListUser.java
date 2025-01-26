@@ -5,5 +5,5 @@ import org.cerroteberes.userservice.domain.dto.response.ReadUserDTO;
 import java.util.List;
 
 public interface InListUser {
-    List<ReadUserDTO> execute();
+    List<ReadUserDTO> executeListUser();
 }

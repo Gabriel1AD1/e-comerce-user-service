@@ -1,9 +1,6 @@
 package org.cerroteberes.userservice.domain.dto.request;
 
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Pattern;
-import jakarta.validation.constraints.Size;
+import jakarta.validation.constraints.*;
 import lombok.Value;
 
 /**
@@ -15,6 +12,10 @@ public class RequestUpdateUserDTO {
     @NotBlank(message = "El nombre no puede estar vacío")
     @Size(min = 3, max = 100, message = "El nombre debe tener entre 3 y 100 caracteres")
     String name;
+
+    @Email
+    @NotNull
+    String email;
 
     @NotNull(message = "La contraseña no puede ser nula")
     @NotBlank(message = "La contraseña no puede estar vacía")

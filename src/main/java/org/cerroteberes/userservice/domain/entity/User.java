@@ -18,6 +18,8 @@ public class User {
     @NotNull
     private String name;
     @NotNull
+    private String email;
+    @NotNull
     private String password;
     @NotNull
     private Instant createAt;

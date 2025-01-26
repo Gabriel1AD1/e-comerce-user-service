@@ -11,7 +11,7 @@ import java.time.Instant;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name = "user_roles")
+@Table(name = "tbl_user_roles")
 public class UserRoleEntity {
 
     @Id
