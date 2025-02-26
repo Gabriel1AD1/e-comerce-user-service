@@ -26,6 +26,8 @@ import java.time.LocalDateTime;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
+import static org.cerroteberes.userservice.infra.security.ErrorMessage.TOKEN_INVALID;
+
 @Component
 @AllArgsConstructor
 public class SecurityFilter extends OncePerRequestFilter {
@@ -103,18 +105,12 @@ public class SecurityFilter extends OncePerRequestFilter {
             }
 
         } else {
-            ApiError apiError = ApiError.builder()
-                    .status(HttpStatus.UNAUTHORIZED)
-                    .timestamp(LocalDateTime.now())
-                    .debugMessage("Revisa el token que se envió correctamente")
-                    .message("Token inválido o no presente")
-                    .build();
-
+            ApiError apiError = ApiError.unauthorizedForToken();
             // Establecer la respuesta en formato JSON
             response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
             response.setContentType("application/json");
             response.getWriter().write(objectMapper.writeValueAsString(apiError));
-            logger.warn("La autenticación ha sido fallida");
+            logger.debug("La autenticación ha sido fallida");
             return;
         }
 

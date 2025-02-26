@@ -13,7 +13,6 @@ import org.cerroteberes.userservice.domain.dto.response.ReadUserDTO;
 import org.cerroteberes.userservice.domain.dto.response.ResponseUserPrincipalDTO;
 import org.cerroteberes.userservice.domain.entity.Role;
 import org.cerroteberes.userservice.domain.entity.User;
-import org.cerroteberes.userservice.domain.entity.UserRole;
 import org.cerroteberes.userservice.domain.entity.enums.NameRole;
 import org.cerroteberes.userservice.domain.entity.enums.TypeUserSignup;
 
@@ -31,11 +30,11 @@ public class UserUseCase implements InCreateUser, InDeleteUser, InListUser, InUp
         User user = requestUserMapper.toEntity(dto);
         User userSave= userService.create(user);
         switch (typeUserSignup){
-            case VENDOR -> {
+            case vendor -> {
                 Role role = roleService.findByRoleName(NameRole.VENDOR);;
                 roleUserService.create(userSave.getId(), role.getId());
             }
-            case CLIENT -> {
+            case client -> {
                 Role role = roleService.findByRoleName(NameRole.CLIENT);;
                 roleUserService.create(userSave.getId(), role.getId());
             }

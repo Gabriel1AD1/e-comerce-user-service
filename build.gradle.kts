@@ -1,6 +1,6 @@
 plugins {
 	java
-	id("org.springframework.boot") version "3.4.2"
+	id("org.springframework.boot") version "3.3.0"
 	id("io.spring.dependency-management") version "1.1.7"
 }
 
@@ -34,6 +34,7 @@ dependencies {
 	testImplementation("org.springframework.security:spring-security-test")
 	testRuntimeOnly("org.junit.platform:junit-platform-launcher")
 	implementation ("me.paulschwarz:spring-dotenv:3.0.0")
+	implementation("com.h2database:h2")
 
 	// Agregar Lombok
 	compileOnly("org.projectlombok:lombok:1.18.26")
