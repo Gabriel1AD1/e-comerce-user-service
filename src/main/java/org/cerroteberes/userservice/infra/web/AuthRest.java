@@ -17,24 +17,27 @@ import java.net.URI;
 import static org.cerroteberes.userservice.infra.web.ApiVersion.v1;
 
 @RestController
-@RequestMapping(v1+"user-principal")
+@RequestMapping(v1 + "user-principal")
 @PreAuthorize("hasRole('ADMIN') or hasRole('TOTAL_ACCESS')")
 @AllArgsConstructor
 public class AuthRest {
     private final InCreateUser inCreateUser;
     private final InGetUserPrincipalForEmail inGetUserPrincipalForEmail;
     private final InGetUserPrincipalForUserId inGetUserPrincipalForUserId;
+
     @GetMapping("/")
-    public ResponseEntity<ResponseUserPrincipalDTO> getUserPrincipalByImei(@RequestParam("email") String email){
+    public ResponseEntity<ResponseUserPrincipalDTO> getUserPrincipalByImei(@RequestParam("email") String email) {
         return ResponseEntity.ok(inGetUserPrincipalForEmail.executeGetUserPrincipalForEmail(email));
     }
+
     @GetMapping("/{id}")
-    public ResponseEntity<ResponseUserPrincipalDTO> getUserPrincipalById(@PathVariable("id")Long userId){
+    public ResponseEntity<ResponseUserPrincipalDTO> getUserPrincipalById(@PathVariable("id") Long userId) {
         return ResponseEntity.ok(inGetUserPrincipalForUserId.executeGetUserPrincipalForUserId(userId));
     }
+
     @PostMapping("/{type-user}")
-    public ResponseEntity<Void> createResource(@Valid @RequestBody RequestCreateUserDTO dto, @PathVariable("type-user") TypeUserSignup typeUserSignup){
-        Long idGenerate = inCreateUser.executeCreateUser(dto,typeUserSignup).getId();
+    public ResponseEntity<Void> createResource(@Valid @RequestBody RequestCreateUserDTO dto, @PathVariable("type-user") TypeUserSignup typeUserSignup) {
+        Long idGenerate = inCreateUser.executeCreateUser(dto, typeUserSignup).getId();
         return ResponseEntity.created(URI.create("/api/v1/user/".concat(idGenerate.toString()))).build();
     }
 }

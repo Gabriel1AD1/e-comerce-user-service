@@ -13,6 +13,6 @@ import java.util.List;
 @NoArgsConstructor
 @Builder
 public class MCSVPrincipal {
-    private String  name;
+    private String name;
     private List<RoleMicroservice> roleMicroservices;
 }

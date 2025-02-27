@@ -24,6 +24,7 @@ public class SecurityConfig {
      * Filtro de seguridad personalizado para la autenticación basada en tokens.
      */
     private final SecurityFilter securityFilter;
+
     /**
      * Configura la cadena de filtros de seguridad para la aplicación.
      *

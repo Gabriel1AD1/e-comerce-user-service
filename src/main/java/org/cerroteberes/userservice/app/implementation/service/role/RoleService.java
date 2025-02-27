@@ -8,9 +8,13 @@ import java.util.List;
 
 public interface RoleService {
     Role create(Role role);
+
     Role update(Role role);
+
     void delete(Long id);
+
     List<ReadRoleDTO> FindALlRead();
+
     List<Role> findAll();
 
     Role findByRoleName(NameRole nameRole);

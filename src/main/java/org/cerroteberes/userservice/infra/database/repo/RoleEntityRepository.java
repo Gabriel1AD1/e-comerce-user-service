@@ -12,7 +12,9 @@ import java.util.Optional;
 public interface RoleEntityRepository extends JpaRepository<RoleEntity, Long> {
     @Query("select r.id,r.nameRole,r.descriptionRole from RoleEntity r where r.id = ?1")
     Optional<RoleEntityInfo> readFindById(Long id);
+
     @Query("select r.id,r.nameRole,r.descriptionRole from RoleEntity r")
     List<RoleEntityInfo> readFindAll();
+
     RoleEntity findByNameRole(NameRole nameRole);
 }

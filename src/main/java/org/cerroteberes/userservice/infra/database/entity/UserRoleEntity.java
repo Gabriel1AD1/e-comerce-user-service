@@ -2,6 +2,7 @@ package org.cerroteberes.userservice.infra.database.entity;
 
 import jakarta.persistence.*;
 import lombok.*;
+
 import java.time.Instant;
 
 @Getter

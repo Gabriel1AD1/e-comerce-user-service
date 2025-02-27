@@ -21,6 +21,7 @@ import static org.cerroteberes.userservice.app.utils.OptionalMapper.wrapInOption
 public class AdapterOutRoleUserRepository implements OutRoleUserRepository {
     private final UserRoleEntityRepository userRoleEntityRepository;
     private final UserRoleEntityMapper userRoleEntityMapper;
+
     @Override
     public Optional<UserRole> findByIdUserAndIdRole(Long idUser, Long roleId) {
         return wrapInOptional(userRoleEntityMapper.toDomain(
@@ -35,7 +36,7 @@ public class AdapterOutRoleUserRepository implements OutRoleUserRepository {
 
     @Override
     public int deleteByIdUserAndIdRole(Long idUser, Long roleId) {
-        return userRoleEntityRepository.deleteByUserIdAndRoleId(idUser,roleId);
+        return userRoleEntityRepository.deleteByUserIdAndRoleId(idUser, roleId);
     }
 
     @Override

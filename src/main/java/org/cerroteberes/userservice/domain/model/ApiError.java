@@ -56,7 +56,8 @@ public class ApiError {
                 .debugMessage(debugMessage)
                 .build();
     }
-    public static ApiError unauthorized(String message, String details,String codeStatusError) {
+
+    public static ApiError unauthorized(String message, String details, String codeStatusError) {
         return ApiError.builder()
                 .codeStatus(401L)
                 .codeStatusError(codeStatusError)
@@ -66,6 +67,7 @@ public class ApiError {
                 .message(message)
                 .build();
     }
+
     public static ApiError internalServerError(String message, String debugMessage) {
         return ApiError.builder()
                 .status(HttpStatus.INTERNAL_SERVER_ERROR)
@@ -77,6 +79,6 @@ public class ApiError {
     }
 
     public static ApiError unauthorizedForToken() {
-        return ApiError.unauthorized(TOKEN_INVALID.getMessage(),TOKEN_INVALID.getDetail(),TOKEN_INVALID.getCode());
+        return ApiError.unauthorized(TOKEN_INVALID.getMessage(), TOKEN_INVALID.getDetail(), TOKEN_INVALID.getCode());
     }
 }

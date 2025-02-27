@@ -9,10 +9,12 @@ import org.cerroteberes.userservice.domain.entity.enums.NameRole;
 import org.cerroteberes.userservice.domain.repo.RoleRepository;
 
 import java.util.List;
+
 @AppService
 @AllArgsConstructor
 public class RoleServiceI implements RoleService {
     private final RoleRepository roleRepository;
+
     @Override
     public Role create(Role role) {
         return roleRepository.save(role);

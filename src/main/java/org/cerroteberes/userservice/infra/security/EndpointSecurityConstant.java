@@ -9,7 +9,7 @@ public class EndpointSecurityConstant {
             "/api/v1/**"
 
     };
-    public static final String[] ENDPOINT_SWAGGER= {
+    public static final String[] ENDPOINT_SWAGGER = {
             "/swagger-ui.html",
             "/v3/api-docs/**",
             "/swagger-ui/**"

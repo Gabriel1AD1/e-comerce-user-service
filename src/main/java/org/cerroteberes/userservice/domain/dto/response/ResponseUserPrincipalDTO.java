@@ -7,6 +7,7 @@ import lombok.Data;
 import org.cerroteberes.userservice.domain.entity.enums.NameRole;
 
 import java.util.List;
+
 @Data
 @AllArgsConstructor
 @Builder

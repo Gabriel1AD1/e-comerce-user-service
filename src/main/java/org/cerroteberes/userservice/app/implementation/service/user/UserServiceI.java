@@ -14,6 +14,7 @@ import java.util.List;
 @AllArgsConstructor
 public class UserServiceI implements UserService {
     private final UserRepository userRepository;
+
     @Override
     public ReadUserDTO readFindById(Long id) {
         return userRepository.findByIdRead(id).orElseThrow(
@@ -32,7 +33,7 @@ public class UserServiceI implements UserService {
     }
 
     @Override
-    public void update(User dto,Long userId) {
+    public void update(User dto, Long userId) {
         User user = userRepository.findById(userId).orElseThrow(
                 () -> new EntityNotFoundException("No se ha encontrado el usuario que desea actualizar")
         );

@@ -18,7 +18,7 @@ public class RoleInitializer implements CommandLineRunner {
     @Override
     public void run(String... args) throws Exception {
 
-        if (roleEntityRepository.count()==0){
+        if (roleEntityRepository.count() == 0) {
             RoleEntity admin = RoleEntity.builder()
                     .descriptionRole("Rol de administrador tiene poder y acceso a todo ")
                     .nameRole(NameRole.ADMIN)

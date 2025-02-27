@@ -20,22 +20,25 @@ import java.util.List;
 
 @AppUseCase
 @AllArgsConstructor
-public class UserUseCase implements InCreateUser, InDeleteUser, InListUser, InUpdateUser, InGetUserPrincipalForEmail ,InGetUserPrincipalForUserId{
+public class UserUseCase implements InCreateUser, InDeleteUser, InListUser, InUpdateUser, InGetUserPrincipalForEmail, InGetUserPrincipalForUserId {
     private final RequestUserMapper requestUserMapper;
     private final UserService userService;
     private final RoleService roleService;
     private final RoleUserService roleUserService;
+
     @Override
     public User executeCreateUser(RequestCreateUserDTO dto, TypeUserSignup typeUserSignup) {
         User user = requestUserMapper.toEntity(dto);
-        User userSave= userService.create(user);
-        switch (typeUserSignup){
+        User userSave = userService.create(user);
+        switch (typeUserSignup) {
             case vendor -> {
-                Role role = roleService.findByRoleName(NameRole.VENDOR);;
+                Role role = roleService.findByRoleName(NameRole.VENDOR);
+                ;
                 roleUserService.create(userSave.getId(), role.getId());
             }
             case client -> {
-                Role role = roleService.findByRoleName(NameRole.CLIENT);;
+                Role role = roleService.findByRoleName(NameRole.CLIENT);
+                ;
                 roleUserService.create(userSave.getId(), role.getId());
             }
         }
@@ -53,9 +56,9 @@ public class UserUseCase implements InCreateUser, InDeleteUser, InListUser, InUp
     }
 
     @Override
-    public void execute(RequestUpdateUserDTO dto,Long id) {
+    public void execute(RequestUpdateUserDTO dto, Long id) {
         User user = requestUserMapper.toEntity(dto);
-        userService.update(user,id);
+        userService.update(user, id);
     }
 
     @Override
@@ -68,8 +71,9 @@ public class UserUseCase implements InCreateUser, InDeleteUser, InListUser, InUp
                 .roles(roles)
                 .build();
     }
+
     @Override
-    public ResponseUserPrincipalDTO executeGetUserPrincipalForUserId(Long userId){
+    public ResponseUserPrincipalDTO executeGetUserPrincipalForUserId(Long userId) {
         User user = userService.findById(userId);
         List<NameRole> roles = roleUserService.getRoleByUserId(user.getId());
         return ResponseUserPrincipalDTO.builder()

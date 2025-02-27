@@ -34,13 +34,13 @@ public class SecurityFilter extends OncePerRequestFilter {
     private final ConfigurationSecurity configurationSecurity;
     private final ObjectMapper objectMapper;
     private final JwtTokenUtil jwtTokenUtil;
+
     @Override
     protected void doFilterInternal(
             HttpServletRequest request,
             HttpServletResponse response,
             FilterChain filterChain)
-            throws ServletException, IOException
-    {
+            throws ServletException, IOException {
 
         switch (configurationSecurity.getAuthenticationType()) {
             case NONE, BASIC:
@@ -48,7 +48,7 @@ public class SecurityFilter extends OncePerRequestFilter {
             case BEARER:
                 doBearerFilter(request, response, filterChain);
                 break;
-                default:
+            default:
                 throw new UnauthorizedException("Authentication type not supported");
         }
 
@@ -95,11 +95,10 @@ public class SecurityFilter extends OncePerRequestFilter {
                 }
 
 
-
             } catch (Exception e) {
                 logger.error("Error al procesar el token JWT: " + e.getMessage());
                 response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
-                logger.warn("Error en el procesamiento del jwt {}"+e.getMessage());
+                logger.warn("Error en el procesamiento del jwt {}" + e.getMessage());
                 response.getWriter().write("Token inválido");
                 return;
             }
@@ -117,7 +116,6 @@ public class SecurityFilter extends OncePerRequestFilter {
         // Continuar con la siguiente cadena de filtros
         filterChain.doFilter(request, response);
     }
-
 
 
 }

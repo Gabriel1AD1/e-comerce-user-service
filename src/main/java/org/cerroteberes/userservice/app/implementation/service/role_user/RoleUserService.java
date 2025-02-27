@@ -10,7 +10,7 @@ public interface RoleUserService {
 
     UserRole update(Long idUser, Long roleId);
 
-    void delete(Long idUser,Long roleId);
+    void delete(Long idUser, Long roleId);
 
     List<NameRole> getRoleByUserId(Long userId);
 }

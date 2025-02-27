@@ -20,6 +20,7 @@ import static org.cerroteberes.userservice.app.utils.OptionalMapper.wrapInOption
 public class AdapterOutUserRepository implements OutUserRepository {
     private final UserEntityRepository userEntityRepository;
     private final UserEntityMapper userEntityMapper;
+
     @Override
     public Optional<User> findById(Long userId) {
         UserEntity userEntity = userEntityRepository.findById(userId).orElse(null);

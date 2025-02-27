@@ -13,6 +13,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Collection;
 import java.util.stream.Collectors;
+
 public class MCSVPrincipalSecurity extends MCSVPrincipal implements UserDetails {
     private static final Logger log = LoggerFactory.getLogger(MCSVPrincipalSecurity.class);
 
